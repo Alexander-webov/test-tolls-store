@@ -17,13 +17,22 @@ export type NewUser = {
   email: string;
 };
 
+export type User = {
+  email: string;
+  password: string;
+};
+
 export class AuthApi {
   private readonly request: APIRequestContext;
   constructor(request: APIRequestContext) {
     this.request = request;
   }
 
+  async login(user: User) {
+    return this.request.post(`/users/login`, { data: user });
+  }
+
   async register(newUser: NewUser) {
-    return await this.request.post(`/users/register`, { data: newUser });
+    return this.request.post(`/users/register`, { data: newUser });
   }
 }
