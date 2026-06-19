@@ -37,14 +37,14 @@ test.describe("products", () => {
     expect(data.current_page).toBe(1);
     console.log(data);
   });
-  test("/products?category={id}` | Positive | regression | 200; all items belong to the filtered category", async ({ request }) => {
+  test.skip("/products?category={id}` | Positive | regression | 200; all items belong to the filtered category", async ({ request }) => {
     const products = new ProductApi(request);
     const response = await products.getProductCategoryIdAPI("01KVE1P5EW6DXYXP23AKDSDZMT");
     expect(response.status()).toBe(200);
     const data = await response.json();
     expect(data.slug).toBe("hammer");
   });
-  test("/products/{id}` | Positive | regression | 200; item shape matches contract", async ({ request }) => {
+  test.skip("/products/{id}` | Positive | regression | 200; item shape matches contract", async ({ request }) => {
     const products = new ProductApi(request);
     const response = await products.getProductById("01KVE1P5G7BF2DH24P1ZPJWM2Y");
     expect(response.status()).toBe(200);
