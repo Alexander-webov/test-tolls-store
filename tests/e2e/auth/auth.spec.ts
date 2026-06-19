@@ -49,19 +49,19 @@ const dataNewUserExistEmail = {
 test.describe("test login page", () => {
   test("Login with provided customer creds | Lands on account/home as logged-in user", { tag: "@smoke" }, async ({ page, loginPage }) => {
     expect(page.getByRole("heading", { name: "Login" }));
-    loginPage.login(dataForLogin.email, dataForLogin.password);
+    await loginPage.login(dataForLogin.email, dataForLogin.password);
     await expect(page.getByTestId("page-title")).toHaveText("My account");
   });
   /* login-error */
   test(" Login with wrong password | Error message visible; not logged in ", { tag: "@regression" }, async ({ page, loginPage }) => {
     expect(page.getByRole("heading", { name: "Login" }));
-    loginPage.login(dataForLogin.email, "MyWronGPassoerd");
+    await loginPage.login(dataForLogin.email, "MyWronGPassoerd");
     await expect(page.getByTestId("login-error")).toHaveText("Invalid email or password");
   });
 
   test("Login with empty fields | HTML5 / inline validation triggers", { tag: "@regression" }, async ({ page, loginPage }) => {
     expect(page.getByRole("heading", { name: "Login" }));
-    loginPage.login("", "");
+    await loginPage.login("", "");
     await expect(page.getByTestId("email-error")).toHaveText("Email is required");
     await expect(page.getByTestId("password-error")).toHaveText("Password is required");
   });
